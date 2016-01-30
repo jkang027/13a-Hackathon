@@ -1,0 +1,33 @@
+﻿<Window x:Name="GameDetailsWindow1" x:Class="HackathonGames.GameDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HackathonGames"
+        mc:Ignorable="d"
+        Title="GameDetailsWindow" Height="700" Width="1000" MinHeight="700" MinWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="139*"/>
+            <ColumnDefinition Width="206*"/>
+            <ColumnDefinition Width="648*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="332*"/>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="202*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="textBlockName" Margin="10,10,9.6,3.2" TextWrapping="Wrap" FontSize="21.333" Grid.ColumnSpan="3"/>
+        <Image x:Name="image" Margin="10,17,8.6,5" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <GroupBox x:Name="groupBox" Grid.Column="2" Header="Game Description" Margin="10.4,17,9.6,10.4" Grid.Row="2" Grid.RowSpan="3">
+            <WebBrowser x:Name="webBrowserDescription" Margin="10,10,-2.6,-2.4"/>
+        </GroupBox>
+        <TextBlock x:Name="textBlockDeck" HorizontalAlignment="Left" Margin="10,1.8,0,0" TextWrapping="Wrap" Grid.ColumnSpan="3" Width="974" Grid.Row="1"/>
+        <TextBlock x:Name="textBlockReleaseDate" Margin="10,10,9.6,10" Grid.Row="3" TextWrapping="Wrap" Grid.ColumnSpan="2" FontSize="21.333"><Run Text=""/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="textBlock" Margin="10,10,0.2,10.4" Grid.Row="4" TextWrapping="Wrap" Text="Available on:" FontSize="21.333"/>
+        <TextBlock x:Name="textBlockPlatforms" Grid.Column="1" Margin="9.8,12.5,9.6,10.4" Grid.Row="4" TextWrapping="Wrap" FontSize="16"/>
+
+    </Grid>
+</Window>
