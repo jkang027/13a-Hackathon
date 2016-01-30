@@ -44,15 +44,22 @@ namespace HackathonGames
         {
             MainWindow1.Close();
         }
-
-
+        
         private void button_Click(object sender, RoutedEventArgs e)
         {
             GameSearch.gameSearchResult.Clear();
             var result = GameSearch.getGameSearchResultsFor("\"" + textBoxGameNameSearch.Text + "\"");
-            for (int i = 0; i < result.results.Count; i++)
+            textBlockNumberOfResults.Text = result.number_of_total_results + " Results";
+            if (result.results.Count > 0)
             {
-                GameSearch.gameSearchResult.Add(result.results[i]); 
+                for (int i = 0; i < result.results.Count; i++)
+                {
+                    GameSearch.gameSearchResult.Add(result.results[i]);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No results for search.");
             }
         }
 

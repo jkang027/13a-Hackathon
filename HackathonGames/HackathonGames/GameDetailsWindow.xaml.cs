@@ -102,12 +102,12 @@ namespace HackathonGames
             }
             if (gameInMyList)
             {
-                MessageBox.Show("This game already exists in your \"My List\"");
+                MessageBox.Show("This game already exists in your \"List\"");
             }
             else
             {
                 GameSearch.myList.Add(MainWindow.currentlySelectedResult);
-                MessageBox.Show("Game has been added to \"My List\"");
+                MessageBox.Show("Game has been added to your \"List\"");
             }
         }
     }
