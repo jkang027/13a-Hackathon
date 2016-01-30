@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HackathonGames.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace HackathonGames
             textBlockDeck.Text = MainWindow.currentlySelectedResult.deck;
 
             //If there are currentlySelectedResult.platforms, show them. Else, show "not available"
-            if (MainWindow.currentlySelectedResult.platforms.Count != 0)
+            if (MainWindow.currentlySelectedResult.platforms.Count > 0)
             {
                 for (var i = 0; i < MainWindow.currentlySelectedResult.platforms.Count; i++)
                 {
@@ -74,18 +75,40 @@ namespace HackathonGames
                 }
                 image.Source = new BitmapImage(new Uri(MainWindow.currentlySelectedResult.image.super_url));
             }
-            //else
-            //{
-            //    if (!File.Exists("http://vignette3.wikia.nocookie.net/wiisportsresortwalkthrough/images/6/60/No_Image_Available.png/revision/latest?cb=20140118173446"))
-            //    {
-            //        using (var webClient = new WebClient())
-            //        {
-            //            byte[] bytes = webClient.DownloadData("http://vignette3.wikia.nocookie.net/wiisportsresortwalkthrough/images/6/60/No_Image_Available.png/revision/latest?cb=20140118173446");
-            //            File.WriteAllBytes(MainWindow.currentlySelectedResult.image + ".png", bytes);
-            //        }
-            //    }
-            //    image.Source = new BitmapImage(new Uri("http://vignette3.wikia.nocookie.net/wiisportsresortwalkthrough/images/6/60/No_Image_Available.png/revision/latest?cb=20140118173446"));
-            //}
+            else
+            {
+                if (!File.Exists("http://vignette3.wikia.nocookie.net/wiisportsresortwalkthrough/images/6/60/No_Image_Available.png/revision/latest?cb=20140118173446"))
+                {
+                    using (var webClient = new WebClient())
+                    {
+                        byte[] bytes = webClient.DownloadData("http://vignette3.wikia.nocookie.net/wiisportsresortwalkthrough/images/6/60/No_Image_Available.png/revision/latest?cb=20140118173446");
+                        File.WriteAllBytes(MainWindow.currentlySelectedResult.image + ".png", bytes);
+                    }
+                }
+                image.Source = new BitmapImage(new Uri("http://vignette3.wikia.nocookie.net/wiisportsresortwalkthrough/images/6/60/No_Image_Available.png/revision/latest?cb=20140118173446"));
+            }
+        }
+
+        //Check if game already exists in your list. If it does, give message. 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            bool gameInMyList = false;
+            for (var i = 0; i < GameSearch.myList.Count; i++)
+            {
+                if(GameSearch.myList[i].name == MainWindow.currentlySelectedResult.name)
+                {
+                    gameInMyList = true;
+                }
+            }
+            if (gameInMyList)
+            {
+                MessageBox.Show("This game already exists in your \"My List\"");
+            }
+            else
+            {
+                GameSearch.myList.Add(MainWindow.currentlySelectedResult);
+                MessageBox.Show("Game has been added to \"My List\"");
+            }
         }
     }
 }

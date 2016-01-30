@@ -10,24 +10,28 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="139*"/>
             <ColumnDefinition Width="206*"/>
-            <ColumnDefinition Width="648*"/>
+            <ColumnDefinition Width="553*"/>
+            <ColumnDefinition Width="94*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="43*"/>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="332*"/>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="202*"/>
+            <RowDefinition Height="138*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="67*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="textBlockName" Margin="10,10,9.6,3.2" TextWrapping="Wrap" FontSize="21.333" Grid.ColumnSpan="3"/>
-        <Image x:Name="image" Margin="10,17,8.6,5" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <GroupBox x:Name="groupBox" Grid.Column="2" Header="Game Description" Margin="10.4,17,9.6,10.4" Grid.Row="2" Grid.RowSpan="3">
+        <TextBlock x:Name="textBlockName" Margin="10,10,5,0" TextWrapping="Wrap" FontSize="21.333" Grid.ColumnSpan="3" Height="30" VerticalAlignment="Top"/>
+        <Image x:Name="image" Margin="10,90,9,0" Grid.ColumnSpan="2"/>
+        <GroupBox x:Name="groupBox" Grid.Column="2" Header="Game Description" Margin="0,90,8,10" Grid.RowSpan="5" Grid.ColumnSpan="2">
             <WebBrowser x:Name="webBrowserDescription" Margin="10,10,-2.6,-2.4"/>
         </GroupBox>
-        <TextBlock x:Name="textBlockDeck" HorizontalAlignment="Left" Margin="10,1.8,0,0" TextWrapping="Wrap" Grid.ColumnSpan="3" Width="974" Grid.Row="1"/>
-        <TextBlock x:Name="textBlockReleaseDate" Margin="10,10,9.6,10" Grid.Row="3" TextWrapping="Wrap" Grid.ColumnSpan="2" FontSize="21.333"><Run Text=""/><LineBreak/><Run/></TextBlock>
-        <TextBlock x:Name="textBlock" Margin="10,10,0.2,10.4" Grid.Row="4" TextWrapping="Wrap" Text="Available on:" FontSize="21.333"/>
-        <TextBlock x:Name="textBlockPlatforms" Grid.Column="1" Margin="9.8,12.5,9.6,10.4" Grid.Row="4" TextWrapping="Wrap" FontSize="16"/>
+        <TextBlock x:Name="textBlockDeck" Margin="10,45,5,0" TextWrapping="Wrap" Grid.ColumnSpan="3" Height="39" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockReleaseDate" Margin="10,10,9,10" Grid.Row="3" TextWrapping="Wrap" Grid.ColumnSpan="2" FontSize="21.333"><Run Text=""/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="textBlock" Margin="10,10,0,10" Grid.Row="4" TextWrapping="Wrap" Text="Available on:" FontSize="21.333"/>
+        <TextBlock x:Name="textBlockPlatforms" Grid.Column="1" Margin="10,12,9,9" Grid.Row="4" TextWrapping="Wrap" FontSize="16"/>
+        <Button x:Name="button" Grid.Column="3" Margin="0,3,3,0" Click="button_Click" Height="81" VerticalAlignment="Top" HorizontalAlignment="Right" Width="87">
+            <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Add to My List" Height="66" Width="77" TextAlignment="Center" FontSize="21.333"/>
+        </Button>
 
     </Grid>
 </Window>

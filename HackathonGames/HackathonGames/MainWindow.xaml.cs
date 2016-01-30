@@ -23,33 +23,54 @@ namespace HackathonGames
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static ObservableCollection<Result> gameSearchResult = new ObservableCollection<Result>();
-
         public MainWindow()
         {
             InitializeComponent();
-            dataGrid.ItemsSource = gameSearchResult;
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            gameSearchResult.Clear();
-            var result = GameSearch.getGameSearchResultsFor("\"" + textBoxGameNameSearch.Text + "\"");
-            for (int i = 0; i < result.results.Count; i++)
-            {
-                gameSearchResult.Add(result.results[i]); 
-            }
+            GameSearch.LoadFromDisk();
+            dataGrid.ItemsSource = GameSearch.gameSearchResult;
         }
 
         public static Result currentlySelectedResult = null;
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            GameSearch.SaveToDisk();
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            GameSearch.SaveToDisk();
+        }
+        private void MenuItem_Click_Close(object sender, RoutedEventArgs e)
+        {
+            MainWindow1.Close();
+        }
+
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            GameSearch.gameSearchResult.Clear();
+            var result = GameSearch.getGameSearchResultsFor("\"" + textBoxGameNameSearch.Text + "\"");
+            for (int i = 0; i < result.results.Count; i++)
+            {
+                GameSearch.gameSearchResult.Add(result.results[i]); 
+            }
+        }
+
         public void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             currentlySelectedResult = (Result)dataGrid.SelectedItem;
         }
+
         private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             GameDetailsWindow gameDetailsWindow = new GameDetailsWindow();
-            gameDetailsWindow.Show();
+            gameDetailsWindow.ShowDialog();
+        }
+        
+        private void MenuItem_Click_GoToMyList(object sender, RoutedEventArgs e)
+        {
+            MyListWindow myListWindow = new MyListWindow();
+            myListWindow.ShowDialog();
         }
     }
 }
