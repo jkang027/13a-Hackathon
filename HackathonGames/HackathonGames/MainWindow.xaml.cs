@@ -70,14 +70,25 @@ namespace HackathonGames
 
         private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(true);
-            gameDetailsWindow.ShowDialog();
+            if (currentlySelectedResult != null)
+            {
+                GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(true);
+                gameDetailsWindow.ShowDialog();
+            }
         }
         
         private void MenuItem_Click_GoToMyList(object sender, RoutedEventArgs e)
         {
             MyListWindow myListWindow = new MyListWindow();
             myListWindow.ShowDialog();
+        }
+
+        private void textBoxGameNameSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                button_Click(this, new RoutedEventArgs());
+            }
         }
     }
 }

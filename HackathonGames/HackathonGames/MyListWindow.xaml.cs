@@ -36,8 +36,11 @@ namespace HackathonGames
 
         private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(false);
-            gameDetailsWindow.ShowDialog();
+            if (currentlySelectedResult != null)
+            {
+                GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(false);
+                gameDetailsWindow.ShowDialog();
+            }
         }
 
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
