@@ -1,4 +1,5 @@
 ﻿using HackathonGames.Core;
+using HackathonGames.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,18 +23,30 @@ namespace HackathonGames
     /// </summary>
     public partial class GameDetailsWindow : Window
     {
-        public GameDetailsWindow()
+        public Result temp;
+
+        public GameDetailsWindow(bool isFromMainWindow)
         {
             InitializeComponent();
-            textBlockName.Text = MainWindow.currentlySelectedResult.name;
-            textBlockDeck.Text = MainWindow.currentlySelectedResult.deck;
+            
+            if (isFromMainWindow)
+            {
+                temp = MainWindow.currentlySelectedResult;
+            }
+            else
+            {
+                temp = MyListWindow.currentlySelectedResult;
+            }
+
+            textBlockName.Text = temp.name;
+            textBlockDeck.Text = temp.deck;
 
             //If there are currentlySelectedResult.platforms, show them. Else, show "not available"
-            if (MainWindow.currentlySelectedResult.platforms.Count > 0)
+            if (temp.platforms.Count > 0)
             {
-                for (var i = 0; i < MainWindow.currentlySelectedResult.platforms.Count; i++)
+                for (var i = 0; i < temp.platforms.Count; i++)
                 {
-                    textBlockPlatforms.Text += MainWindow.currentlySelectedResult.platforms[i].name + "\n";
+                    textBlockPlatforms.Text += temp.platforms[i].name + "\n";
                 }
             }
             else
@@ -42,9 +55,9 @@ namespace HackathonGames
             }
 
             //If currentlySelectedResult.releaseDate is not empty, show it. Else show "not available"
-            if (!string.IsNullOrEmpty(MainWindow.currentlySelectedResult.original_release_date))
+            if (!string.IsNullOrEmpty(temp.original_release_date))
             {
-                DateTime releaseDate = DateTime.Parse(MainWindow.currentlySelectedResult.original_release_date);
+                DateTime releaseDate = DateTime.Parse(temp.original_release_date);
                 textBlockReleaseDate.Text = "Release Date: " + releaseDate.Year + "-" + releaseDate.Month + "-" + releaseDate.Day;
             }
             else
@@ -53,9 +66,9 @@ namespace HackathonGames
             }
             
             //If currentlySelectedResult.description is not empty, show it. Else, show "not available"
-            if(!string.IsNullOrEmpty(MainWindow.currentlySelectedResult.description))
+            if(!string.IsNullOrEmpty(temp.description))
             {
-                webBrowserDescription.NavigateToString(MainWindow.currentlySelectedResult.description);
+                webBrowserDescription.NavigateToString(temp.description);
             }
             else
             {
@@ -63,17 +76,17 @@ namespace HackathonGames
             }
 
             //If currentlySelectedResult.image.super_url is not empty, show it. Else, show "image not available" image.
-            if (!string.IsNullOrEmpty(MainWindow.currentlySelectedResult.image.super_url))
+            if (!string.IsNullOrEmpty(temp.image.super_url))
             {
-                if (!File.Exists(MainWindow.currentlySelectedResult.image.super_url))
+                if (!File.Exists(temp.image.super_url))
                 {
                     using (var webClient = new WebClient())
                     {
-                        byte[] bytes = webClient.DownloadData(MainWindow.currentlySelectedResult.image.super_url);
-                        File.WriteAllBytes(MainWindow.currentlySelectedResult.image + ".png", bytes);
+                        byte[] bytes = webClient.DownloadData(temp.image.super_url);
+                        File.WriteAllBytes(temp.image + ".png", bytes);
                     }
                 }
-                image.Source = new BitmapImage(new Uri(MainWindow.currentlySelectedResult.image.super_url));
+                image.Source = new BitmapImage(new Uri(temp.image.super_url));
             }
             else
             {
@@ -82,7 +95,7 @@ namespace HackathonGames
                     using (var webClient = new WebClient())
                     {
                         byte[] bytes = webClient.DownloadData("http://vignette3.wikia.nocookie.net/wiisportsresortwalkthrough/images/6/60/No_Image_Available.png/revision/latest?cb=20140118173446");
-                        File.WriteAllBytes(MainWindow.currentlySelectedResult.image + ".png", bytes);
+                        File.WriteAllBytes(temp.image + ".png", bytes);
                     }
                 }
                 image.Source = new BitmapImage(new Uri("http://vignette3.wikia.nocookie.net/wiisportsresortwalkthrough/images/6/60/No_Image_Available.png/revision/latest?cb=20140118173446"));
@@ -95,7 +108,7 @@ namespace HackathonGames
             bool gameInMyList = false;
             for (var i = 0; i < GameSearch.myList.Count; i++)
             {
-                if(GameSearch.myList[i].name == MainWindow.currentlySelectedResult.name)
+                if(GameSearch.myList[i].name == temp.name)
                 {
                     gameInMyList = true;
                 }
@@ -106,7 +119,7 @@ namespace HackathonGames
             }
             else
             {
-                GameSearch.myList.Add(MainWindow.currentlySelectedResult);
+                GameSearch.myList.Add(temp);
                 MessageBox.Show("Game has been added to your \"List\"");
             }
         }

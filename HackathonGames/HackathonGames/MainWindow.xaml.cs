@@ -70,7 +70,7 @@ namespace HackathonGames
 
         private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            GameDetailsWindow gameDetailsWindow = new GameDetailsWindow();
+            GameDetailsWindow gameDetailsWindow = new GameDetailsWindow(true);
             gameDetailsWindow.ShowDialog();
         }
         
